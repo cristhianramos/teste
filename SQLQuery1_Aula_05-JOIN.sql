@@ -4,6 +4,7 @@ create database TESTE_JOIN
 use teste_join
 
 
+create table CARGO
 (
    cod_cargo int,
    nome_cargo varchar(50),
@@ -19,7 +20,7 @@ insert into cargo values
 (3,'Supervisor'),
 (4,'Revisor'),
 (5,'Redator'),
-(6,'Secretï¿½ria')
+(6,'Secretária')
 
 select*from cargo
 
@@ -42,11 +43,11 @@ create table FUNCIONARIO
 )
 
 insert into funcionario values
-(1,5,'Luï¿½s Pereira',3000),
-(2,5,'Antï¿½nio Almeida',3000),
+(1,5,'Luís Pereira',3000),
+(2,5,'Antônio Almeida',3000),
 (3,3,'Donizete Ribeiro',2800),
 (4,3,'Grabriela Moura',4700),
-(5,2,'Emï¿½lio Duate',5000),
+(5,2,'Emílio Duate',5000),
 (6,1,'Carolina Ferreira',9000)
 
 
@@ -69,7 +70,7 @@ INSERT Dependente values
 (1 ,1 , 'Mariana Pereira'),
 (2 ,1 , 'Camila Pereira' ),
 (3 ,1 , 'Eduardo Pereira' ),
-(4 ,2 , 'Clï¿½vis Almeida'),
+(4 ,2 , 'Clóvis Almeida'),
 (5 ,2 , 'Durval Almeida'),
 (6 ,5 , 'Fabiana Duarte' ),
 (7 ,5 , 'Joana Duarte' )
@@ -87,7 +88,7 @@ select*from funcionario,cargo
 Select nome_func, cod_cargo, nome_cargo 
 from funcionario,cargo
 /*ERRO
-Nome da coluna 'cod_cargo' ambï¿½guo.*/
+Nome da coluna 'cod_cargo' ambíguo.*/
 
 
 /*select <nome da tabela>.<nome do campo>,funcionario.cod_cargo,
@@ -108,7 +109,7 @@ Select f.cod_func, f.nome_func, f.sal_func, c.cod_cargo, c.nome_cargo
 from funcionario f, cargo c
 
 /*
-Para associar as tabelas utilizaremos as clï¿½usulas:
+Para associar as tabelas utilizaremos as cláusulas:
 
 JOIN  ou  INNER JOIN
 LEFT JOIN ou LEFT OUTER JOIN
@@ -124,11 +125,11 @@ CROSS JOIN
 /*
 JOIN OU INNER JOIN
 
-- Tem como caracterï¿½stica retornar apenas as 
+- Tem como característica retornar apenas as 
 linhas em que o campo de relacionamento exista
- em ambas as tabelas. Se o conteï¿½do do campo chave de 
- relacionamento existe em uma tabela, mas nï¿½o existe na
-  outra, esta nï¿½o serï¿½ retornada pelo SELECT.
+ em ambas as tabelas. Se o conteúdo do campo chave de 
+ relacionamento existe em uma tabela, mas não existe na
+  outra, esta não será retornada pelo SELECT.
 
 */
 
@@ -141,30 +142,30 @@ from funcionario f inner join cargo c
 on f.cod_cargo = c.cod_cargo
 
 /*
-1	Luï¿½s Pereira	3000.00	    5	Redator
-2	Antï¿½nio Almeida	3000.00	    5	Redator
+1	Luís Pereira	3000.00	    5	Redator
+2	Antônio Almeida	3000.00	    5	Redator
 3	Donizete Ribeiro	2800.00	3	Supervisor
 4	Grabriela Moura	4700.00	    3	Supervisor
-5	Emï¿½lio Duate	5000.00	    2	Gerente
+5	Emílio Duate	5000.00	    2	Gerente
 6	Carolina Ferreira	9000.00	1	Presidente
 */
 
 
--- 	1. Selecionar os funcionï¿½rios e os respectivos dependentes;
+-- 	1. Selecionar os funcionários e os respectivos dependentes;
 
 
 select f.nome_func,d.nome_dep -- campos a serem exibidos
-from funcionario f join dependente d -- relaï¿½ï¿½o de tabela
-on f.cod_func = d.cod_func --aqui deverï¿½ estar a chave estrangeira
+from funcionario f join dependente d -- relação de tabela
+on f.cod_func = d.cod_func --aqui deverá estar a chave estrangeira
 
 /*
-Luï¿½s Pereira	Mariana Pereira
-Luï¿½s Pereira	Camila Pereira
-Luï¿½s Pereira	Eduardo Pereira
-Antï¿½nio Almeida	Clï¿½vis Almeida
-Antï¿½nio Almeida	Durval Almeida
-Emï¿½lio Duate	Fabiana Duarte
-Emï¿½lio Duate	Joana Duarte
+Luís Pereira	Mariana Pereira
+Luís Pereira	Camila Pereira
+Luís Pereira	Eduardo Pereira
+Antônio Almeida	Clóvis Almeida
+Antônio Almeida	Durval Almeida
+Emílio Duate	Fabiana Duarte
+Emílio Duate	Joana Duarte
 */
 
 
@@ -177,8 +178,8 @@ on d.cod_func = f.cod_func
 where f.cod_func = 1
 
 /*
-3. Selecionar os funcionï¿½rios com nome do dependente 
-que contenha a sï¿½laba ï¿½duï¿½;
+3. Selecionar os funcionários com nome do dependente 
+que contenha a sílaba ‘du’;
 
 */
 
@@ -188,7 +189,7 @@ on f.cod_func = d.cod_func
 where d.nome_dep like  '%du%'
 
 
---Usando clï¿½usula WHERE no lugar do INNER JOIN
+--Usando cláusula WHERE no lugar do INNER JOIN
 
 Select f.cod_func, f.nome_func, f.sal_func, c.cod_cargo, c.nome_cargo 
 from funcionario f INNER JOIN cargo c on f.cod_cargo = c.cod_cargo
@@ -201,11 +202,11 @@ WHERE  f.cod_cargo = c.cod_cargo
 
 /*
 RIGHT JOIN ou RIGHT OUTER JOIN
-Permite obter nï¿½o apenas os dados relacionados 
-de duas tabelas, mas tambï¿½m os dados nï¿½o-relacionados 
-encontrados na tabela ï¿½ direita da clï¿½usula JOIN. 
-Caso nï¿½o existam dados associados entre as tabelas ï¿½ esquerda
-e ï¿½ direita de JOIN , serï¿½o retornados valores nulos.
+Permite obter não apenas os dados relacionados 
+de duas tabelas, mas também os dados não-relacionados 
+encontrados na tabela à direita da cláusula JOIN. 
+Caso não existam dados associados entre as tabelas à esquerda
+e à direita de JOIN , serão retornados valores nulos.
 
 */
 select f.cod_func,f.nome_func,f.sal_func,
@@ -215,11 +216,11 @@ on f.cod_cargo=c.cod_cargo
 
 /*LEFT JOIN ou LEFT OUTER JOIN
 
- Permite obter nï¿½o apenas os dados relacionados 
- de duas tabelas, mas tambï¿½m os dados nï¿½o-relacionados 
- encontrados na tabela ï¿½ esquerda da clï¿½usula JOIN. 
- Caso nï¿½o existam dados associados entre as tabelas ï¿½ esquerda 
- e ï¿½ direita de JOIN , serï¿½o retornados valores nulos.
+ Permite obter não apenas os dados relacionados 
+ de duas tabelas, mas também os dados não-relacionados 
+ encontrados na tabela à esquerda da cláusula JOIN. 
+ Caso não existam dados associados entre as tabelas à esquerda 
+ e à direita de JOIN , serão retornados valores nulos.
 */
 
 select f.cod_func,f.nome_func,f.sal_func,
@@ -230,12 +231,12 @@ on f.cod_cargo=c.cod_cargo
 /*
 FULL JOIN ou FULL OUTER JOIN
 
-Todas as linhas de dados da tabela ï¿½ esquerda e
- JOIN e da tabela ï¿½ direita serï¿½o retornados pela 
- clï¿½usula FULL JOIN ou FULL OUTER JOIN.
-Caso uma linha de dados nï¿½o  esteja associada 
+Todas as linhas de dados da tabela à esquerda e
+ JOIN e da tabela à direita serão retornados pela 
+ cláusula FULL JOIN ou FULL OUTER JOIN.
+Caso uma linha de dados não  esteja associada 
 a qualquer linha da outra tabela , os valores das 
-colunas da lista de seleï¿½ï¿½o serï¿½o nulos.
+colunas da lista de seleção serão nulos.
 */
 
 
@@ -244,7 +245,7 @@ c.cod_cargo,c.nome_cargo from
 funcionario f full join cargo c 
 on f.cod_cargo=c.cod_cargo
 
---4. Selecionar os cargos que Nï¿½O TEM funcionï¿½rios associados.
+--4. Selecionar os cargos que NÃO TEM funcionários associados.
 
 select c.nome_cargo
 from funcionario f right join cargo c
@@ -253,9 +254,9 @@ where f.cod_cargo is null
 
 /*CROSS JOIN
 
-Todos os dados da tabela ï¿½ esquerda de JOIN
- sï¿½o cruzados com os dados da tabela ï¿½ direita de JOIN,
-  tambï¿½m conhecido como produto cartesiano.
+Todos os dados da tabela à esquerda de JOIN
+ são cruzados com os dados da tabela à direita de JOIN,
+  também conhecido como produto cartesiano.
 */
 
 select f.nome_func,c.nome_cargo
@@ -268,8 +269,8 @@ SELECT f.nome_func, c.nome_cargo, d.nome_dep
 FROM cargo c CROSS JOIN funcionario f CROSS JOIN dependente d
 
 
-/*Associando mï¿½ltiplas tabelas
- 5. Selecionar nome do funcionï¿½rio, nome do cargo, 
+/*Associando múltiplas tabelas
+ 5. Selecionar nome do funcionário, nome do cargo, 
  nome do dependente usando INNER JOIN.
 */
 
@@ -280,7 +281,7 @@ on f.cod_cargo = c.cod_cargo
  inner join dependente  d
  on f.cod_func = d.cod_func
  
- --6. Selecionar nome do funcionï¿½rio, nome do cargo, 
+ --6. Selecionar nome do funcionário, nome do cargo, 
  --nome do dependente usando WHERE.
 
 select f.nome_func, c.nome_cargo,d.nome_dep
@@ -288,34 +289,34 @@ from funcionario f,cargo c, dependente d
 where f.cod_cargo = c.cod_cargo and f.cod_func = d.cod_func 
 
 /*
-Junï¿½ï¿½o de produto cartesiano ï¿½ uma junï¿½ï¿½o entre duas
- tabelas que origina uma terceira tabela constituï¿½da 
+Junção de produto cartesiano é uma junção entre duas
+ tabelas que origina uma terceira tabela constituída 
  por todos os elementos da primeira combinadas com 
  todos os elementos da segunda.
  
-Junï¿½ï¿½o Interna todas linhas de uma tabela se relacionam 
+Junção Interna todas linhas de uma tabela se relacionam 
 com todas as linhas de outras tabelas se elas 
 tiverem ao menos 1 campo em comum
  
-Junï¿½ï¿½o Externa ï¿½ uma seleï¿½ï¿½o que nï¿½o requer que os 
+Junção Externa é uma seleção que não requer que os 
 registros de uma tabela possuam registros equivalentes em outras
 
  *Left Outer Join todos os registros da tabela esquerda 
- mesmo quando nï¿½o exista registros correspondentes na tabela direita.
+ mesmo quando não exista registros correspondentes na tabela direita.
  
   *Right Outer Join todos os registros da tabela direita 
-  mesmo quando nï¿½o exista registros correspondentes na tabela esquerda.
+  mesmo quando não exista registros correspondentes na tabela esquerda.
   
-  *Full Outer Join Esta operaï¿½ï¿½o apresenta todos os 
-  dados das tabelas ï¿½ esquerda e ï¿½ direita, 
-  mesmo que nï¿½o possuam correspondï¿½ncia em outra tabela
+  *Full Outer Join Esta operação apresenta todos os 
+  dados das tabelas à esquerda e à direita, 
+  mesmo que não possuam correspondência em outra tabela
 */
 
 
 /*
-Associando mï¿½ltiplas tabelas
- 7. Selecionar nome do funcionï¿½rio, nome do cargo, nome do dependente 
- usando JOIN, incluindo os funcionï¿½rios sem dependentes (LEFT).
+Associando múltiplas tabelas
+ 7. Selecionar nome do funcionário, nome do cargo, nome do dependente 
+ usando JOIN, incluindo os funcionários sem dependentes (LEFT).
 */
 
 
@@ -325,10 +326,10 @@ on f.cod_cargo = c.cod_cargo left join dependente d
 on f.cod_func = d.cod_func
 
 /*
-Associando mï¿½ltiplas tabelas
-8. Selecionar nome do funcionï¿½rio, nome do cargo, 
-nome do dependente usando JOIN, incluindo os funcionï¿½rios
- sem dependentes e tambï¿½m os cargos que nï¿½o tem funcionï¿½rios associados.
+Associando múltiplas tabelas
+8. Selecionar nome do funcionário, nome do cargo, 
+nome do dependente usando JOIN, incluindo os funcionários
+ sem dependentes e também os cargos que não tem funcionários associados.
 
 */
 
